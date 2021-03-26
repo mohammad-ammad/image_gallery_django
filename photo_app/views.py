@@ -5,11 +5,15 @@ from django.views import View
 from .models.upload import Upload
 from .models.useraccount import Useraccount
 from .forms import ImageForm
+from django.core.paginator import Paginator
 # Create your views here.
 class Index(View):
     def get(self, request):
         upload = Upload.get_all_data_from_uploads()
-        return render(request, "index.html", {'upload': upload})
+        paginator = Paginator(upload, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "index.html", {'upload': page_obj})
 
 class Img_details(View):
     def get(self, request, pk):
@@ -81,4 +85,17 @@ class Logout(View):
 
 class Post_img(View):
     def get(self, request):
-        return render(request, "post_img.html")
+        forms = ImageForm()
+        return render(request, "post_img.html", {'forms':forms})
+
+    def post(self, request):
+        forms = ImageForm(request.POST, request.FILES)
+        if forms.is_valid():
+            forms.save()
+            return redirect("index")
+
+class Search(View):
+    def get(self, request):
+        search = request.GET['search']
+        data = Upload.objects.filter(name__icontains=search)
+        return render(request, "search.html", {'upload': data})

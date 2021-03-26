@@ -1,35 +1,17 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="container">
-    <div class="col-lg-5 mx-auto my-5 border rounded pt-4 pb-4 pl-4 pr-4">
-        <h3 class="alert alert-light border rounded">Post Image</h3>
-         {% if error%}
-        <div class="alert alert-danger" role="alert">
-            {{error}}
-        </div>
-        {% endif %}
+  <div class="col-lg-5 mx-auto my-5 border rounded pt-4 pb-4 pl-4 pr-4">
+    <h3 class="alert alert-light border rounded">Post Image</h3>
+    {% if error%}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
     <form action="/post_img" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input type="text" class="form-control" name="name"  aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Author</label>
-    <input type="text" class="form-control" name="author"   aria-describedby="emailHelp">
-  </div>
-        <div class="mb-3">
-    <label class="form-label">Description</label>
-    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-        <div class="mb-3">
-<!--            {{forms}}-->
-        </div>
+      {% csrf_token %}
+      <div class="mb-3">{{forms}}</div>
 
-  <button type="submit" class="btn btn-primary">Post</button>
-</form>
-    </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+  </div>
 </div>
 
 {% endblock %}

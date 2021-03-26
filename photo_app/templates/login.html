@@ -1,26 +1,33 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="container">
-    <div class="col-lg-5 mx-auto my-5 border rounded pt-4 pb-4 pl-4 pr-4">
-        <h3 class="alert alert-light border rounded">Create an Account</h3>
-         {% if error%}
-        <div class="alert alert-danger" role="alert">
-            {{error}}
-        </div>
-        {% endif %}
+  <div class="col-lg-5 mx-auto my-5 border rounded pt-4 pb-4 pl-4 pr-4">
+    <h3 class="alert alert-light border rounded">Create an Account</h3>
+    {% if error%}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
     <form action="/login" method="post">
-        {% csrf_token %}
-  <div class="mb-3">
-    <label class="form-label">Email address</label>
-    <input type="email" class="form-control" name="email"  id="exampleInputEmail1" aria-describedby="emailHelp">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
-    </div>
 </div>
 {% endblock %}
